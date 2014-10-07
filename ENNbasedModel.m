@@ -107,10 +107,10 @@ PR = [ 0 100000; %likes
                 ];
             
  
- s = [ 5 5 5 1];    %Change the size of the array and its values to change the number of layers/neurons
+ s = [ 10 10 10 1];    %Change the size of the array and its values to change the number of layers/neurons
  
  for i=1:size(s)
-    Transfer_function{i} = 'purelin';
+    Transfer_function{i} = 'logsig';
  end
  
  
