@@ -50,8 +50,8 @@ title('Total Number of viewers for Hong Kong Umbrella Revolution,as seen on Oct 
 %==========================
 
 bins=929;
-
-distribution  = hist(cell2mat(CV),bins);
+transpose(cell2mat(CV));
+[distribution Level]  = hist((cell2mat(CV)),bins)
 
 %Plot for Distribution 
 subplot(3,2,3);
@@ -79,8 +79,12 @@ xlim([0 1000]);
 %==============================
 
 %qualities
+m=1;
 subplot(3,2,5);
-X= 1:1000;
+X= 1:ROWS -2 ;
+temp = randomFunction((ROWS - 2 ),size(DEVICES,2));
+size(temp)
+
 qual240p = gampdf(X,1.5,300);
 plot(X,qual240p);
 hold on;
@@ -98,7 +102,7 @@ title('Probability Distribution (Gamma) for Video Qualities');
 
 %Devices
 subplot(3,2,6);
-X= 1:1000;
+X= 1:ROWS -2;
 android = gampdf(X,1.5,300);
 plot(X,android);
 hold on;
@@ -119,7 +123,7 @@ figure
 
 %Devices
 subplot(2,2,1);
-X= 1:1000;
+X= 1:ROWS -2;
 asia = gampdf(X,1.5,300);
 plot(X,android);
 hold on;
@@ -129,7 +133,7 @@ hold on;
 europe = gampdf(X,2.8,150);
 plot(X,tv,'-.m');
 hold on;
-desktop = gampdf(X,1.2,200);
+desktop = gampdf(X,2.8,250);
 plot(X,desktop,'-k');
 legend('Asia','America','Europe','Australia');
 ylabel('Probability');
@@ -193,6 +197,28 @@ region1080pandroid = calculateProbabilities(deviceProbs1080p(1,:),REGIONS,pdfsRe
 region1080piphone = calculateProbabilities(deviceProbs1080p(2,:),REGIONS,pdfsRegions);
 region1080ptv = calculateProbabilities(deviceProbs1080p(3,:),REGIONS,pdfsRegions);
 region1080pdesktop = calculateProbabilities(deviceProbs1080p(4,:),REGIONS,pdfsRegions);
+
+
+figure
+
+%plot for 720p android
+
+
+X=1:1:(ROWS-2);
+
+
+plot( X,region720pandroid(1,:),'-');
+hold on;
+plot( X,region720pandroid(2,:),'-r');
+hold on;
+plot( X,region720pandroid(3,:),'-g')
+hold on;
+plot( X,region720pandroid(4,:),'-y')
+legend('Asia','america','Europe','Australia');
+title('Probability Distribution for 720p Android in different regions');
+xlabel('Time Series');
+ylabel('Probability of user demand');
+
 
 
 
